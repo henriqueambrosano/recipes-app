@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import RecepiesAppContext from '../context/RecepiesAppContext';
+import React from 'react';
+import drinkIcon from '../images/drinkIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
 
 function Footer() {
-  const { nada } = useContext(RecepiesAppContext);
   return (
-    <>
-      { nada }
-      Footer
-    </>
+    <footer data-testid="footer">
+      <img src={ drinkIcon } alt="drink icon" data-testid="drinks-bottom-btn" />
+      <img src={ mealIcon } alt="meal icon" data-testid="food-bottom-btn" />
+    </footer>
   );
 }
 
