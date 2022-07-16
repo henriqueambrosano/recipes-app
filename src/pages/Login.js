@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
-import RecepiesAppContext from '../context/RecepiesAppContext';
+import React from 'react';
+import Header from '../components/Header';
 
 function Login() {
-  const { nada } = useContext(RecepiesAppContext);
   return (
-    <>
-      Login
-      { nada }
-    </>
+    <main>
+      NADA
+    </main>
   );
 }
 
