@@ -4,7 +4,7 @@ import Header from '../components/Header';
 function Profile() {
   return (
     <>
-      <Header title="Profile" hasSearchBar={ false }/>
+      <Header title="Profile" hasSearchBar={ false } />
       Conteudo
     </>
   );
