@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import RecepiesAppContext from '../context/RecepiesAppContext';
 
 function Login({ history }) {
-  const { setEmail, email,
-    setPassword, password, setToggle } = useContext(RecepiesAppContext);
+  const { setEstado,
+    estado: { email, password, isDisabled } } = useContext(RecepiesAppContext);
 
   const handleValidation = () => {
     const PASSWORD_LENGTH = 6;
@@ -13,26 +13,29 @@ function Login({ history }) {
     const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
     const isValidated = regex.test(email);
     if (password.length >= PASSWORD_LENGTH && isValidated) {
-      setToggle(false);
+      setEstado((estadoAntigo) => ({ ...estadoAntigo, isDisabled: false }));
     } else {
-      setToggle(true);
+      setEstado((estadoAntigo) => ({ ...estadoAntigo, isDisabled: true }));
     }
   };
 
-  const handleEmail = ({ target: { value } }) => {
-    console.log(value);
-    setEmail(value);
-    handleValidation();
-  };
-  const handlePassword = ({ target: { value } }) => {
-    setPassword(value);
+  const handleChange = ({ target: { name, value } }) => {
+    setEstado((estadoAntigo) => ({ ...estadoAntigo, [name]: value }));
     handleValidation();
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    const userData = {
+      email,
+    };
+    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    setEstado({ email: '', password: '', isDisabled: true });
     history.push('/foods');
   };
+
   return (
     <form onSubmit={ handleSubmit }>
       <label htmlFor="email">
@@ -42,7 +45,8 @@ function Login({ history }) {
           data-testid="email-input"
           name="email"
           placeholder="user@email.com"
-          onChange={ handleEmail }
+          onChange={ handleChange }
+          value={ email }
         />
       </label>
       <label htmlFor="password">
@@ -52,14 +56,14 @@ function Login({ history }) {
           data-testid="password-input"
           name="password"
           placeholder="******"
-          onChange={ handlePassword }
+          onChange={ handleChange }
+          value={ password }
         />
       </label>
       <button
         type="submit"
         data-testid="login-submit-btn"
-        // onClick={ handleValidation }
-        disabled={ handleValidation }
+        disabled={ isDisabled }
       >
         Enter
       </button>
