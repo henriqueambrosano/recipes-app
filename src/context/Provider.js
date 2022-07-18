@@ -5,7 +5,10 @@ import RecepiesAppContext from './RecepiesAppContext';
 function Provider({ children }) {
   const [estado, setEstado] = useState({ email: '', password: '', isDisabled: true });
   const [searchType, setSearchType] = useState('');
-  const [recipesList, setRecipes] = useState([]);
+  const [recipesList, setRecipes] = useState({
+    meals: [],
+    drinks: [],
+  });
 
   const context = {
     estado,

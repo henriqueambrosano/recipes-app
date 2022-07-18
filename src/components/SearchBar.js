@@ -12,14 +12,18 @@ function SearchBar({ title, history }) {
   };
   const isItDrink = title === 'Drinks' ? 'thecocktaildb' : 'themealdb';
 
-  const saveRecipes = async () => {
-    const firstLetterURL = `https://www.${isItDrink}.com/api/json/v1/1/search.php?f=`;
-    if (searchType === firstLetterURL && searchInput.length > 1) {
-      alert('Your search must have only 1 (one) character');
-    } else {
-      const data = await fetchRecipes(`${searchType}${searchInput}`);
-      setRecipes(data);
-      const isItMeal = Object.keys(data)[0];
+  const alertMessage = () => {
+    alert('Sorry, we haven\'t found any recipes for these filters.');
+  };
+
+  const checkErrors = (data, isItMeal) => {
+    if (data === undefined || data[isItMeal] === null) {
+      alertMessage();
+    } else if (!data) {
+      console.log(data);
+      if (!data[isItMeal]) {
+        alertMessage();
+      }
       if (data[isItMeal].length === 1) {
         if (isItMeal === 'drinks') {
           history.push(`/drinks/${data.drinks[0].idDrink}`);
@@ -27,6 +31,18 @@ function SearchBar({ title, history }) {
           history.push(`/foods/${data.meals[0].idMeal}`);
         }
       }
+    }
+  };
+
+  const saveRecipes = async () => {
+    const firstLetterURL = `https://www.${isItDrink}.com/api/json/v1/1/search.php?f=`;
+    if (searchType === firstLetterURL && searchInput.length > 1) {
+      alert('Your search must have only 1 (one) character');
+    } else {
+      const data = await fetchRecipes(`${searchType}${searchInput}`);
+      setRecipes(data);
+      const isItMeal = title === 'Drinks' ? 'drinks' : 'meals';
+      checkErrors(data, isItMeal);
     }
   };
 
