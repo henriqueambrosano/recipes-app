@@ -32,7 +32,7 @@ function Header({ title, hasSearchBar, history }) {
         </button>
       )}
       <h1 data-testid="page-title">{title}</h1>
-      {searchBarVisible && <SearchBar />}
+      {searchBarVisible && <SearchBar title={ title } history={ history } />}
     </>
   );
 }
