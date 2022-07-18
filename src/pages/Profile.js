@@ -7,7 +7,7 @@ function Profile({ history }) {
   return (
     <>
       <Header title="Profile" hasSearchBar={ false } history={ history } />
-      <Footer />
+      <Footer history={ history } />
     </>
   );
 }
