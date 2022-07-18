@@ -18,15 +18,15 @@ function App() {
     <Switch>
       <Route exact path="/" component={ Login } />
       <Route exact path="/foods" component={ Recipes } />
-      <Route path="/foods/:id-da-receita" component={ RecipeDetails } />
+      <Route path="/foods/:id" component={ RecipeDetails } />
       <Route
-        path="/foods/:id-da-receita/in-progress"
+        path="/foods/:id/in-progress"
         component={ RecipeInProgress }
       />
       <Route exact path="/drinks" component={ Drinks } />
-      <Route path="/drinks/:id-da-receita" component={ DrinkDetails } />
+      <Route path="/drinks/:id" component={ DrinkDetails } />
       <Route
-        path="/drinks/:id-da-receita/in-progress"
+        path="/drinks/:id/in-progress"
         component={ DrinkInProgress }
       />
       <Route path="/profile" component={ Profile } />
