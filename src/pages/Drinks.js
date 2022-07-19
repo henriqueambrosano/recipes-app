@@ -4,11 +4,9 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
 import RecepiesAppContext from '../context/RecepiesAppContext';
-import useDefaultList from '../hooks/useDefaultList';
 
 function Drinks({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
-  useDefaultList('thecocktaildb', 'vodka');
   let recipes;
   if (!recipesList) {
     recipes = [];
