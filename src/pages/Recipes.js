@@ -7,9 +7,15 @@ import RecepiesAppContext from '../context/RecepiesAppContext';
 
 function Recipes({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
-  console.log(recipesList);
-  const recipes = recipesList.meals
-    ? recipesList.meals.filter((item, index) => index < +'12') : [];
+  // const recipes = recipesList.meals
+  //   ? recipesList.meals.filter((item, index) => index < +'12') : [];
+  let recipes;
+  if (!recipesList) {
+    recipes = [];
+  } else {
+    recipes = recipesList.meals
+      ? recipesList.meals.filter((item, index) => index < +'12') : [];
+  }
   return (
     <>
       <Header title="Foods" hasSearchBar history={ history } />

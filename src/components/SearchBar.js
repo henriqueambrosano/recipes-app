@@ -20,7 +20,6 @@ function SearchBar({ title, history }) {
     if (data === undefined || data[isItMeal] === null) {
       alertMessage();
     } else if (!data) {
-      console.log(data);
       if (!data[isItMeal]) {
         alertMessage();
       }
