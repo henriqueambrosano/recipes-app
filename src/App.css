@@ -52,6 +52,10 @@ footer {
   width: 200px;
 }
 
+.recipe-image {
+  width: 200px;
+}
+
 
 @keyframes shake {
 
