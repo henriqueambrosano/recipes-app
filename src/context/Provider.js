@@ -6,6 +6,10 @@ import RecepiesAppContext from './RecepiesAppContext';
 function Provider({ children }) {
   const [estado, setEstado] = useState({ email: '', password: '', isDisabled: true });
   const [searchType, setSearchType] = useState('');
+  const [backupList, setBackupList] = useState({
+    meals: [],
+    drinks: [],
+  });
   const [recipesList, setRecipes] = useState({
     meals: [],
     drinks: [],
@@ -16,11 +20,13 @@ function Provider({ children }) {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
       const data = await response.json();
       setRecipes((prevState) => ({ ...prevState, meals: data.meals }));
+      setBackupList((prevState) => ({ ...prevState, meals: data.meals }));
     };
     const initialDrinks = async () => {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
       const data = await response.json();
       setRecipes((prevState) => ({ ...prevState, drinks: data.drinks }));
+      setBackupList((prevState) => ({ ...prevState, drinks: data.drinks }));
     };
     initialFoods();
     initialDrinks();
@@ -33,6 +39,7 @@ function Provider({ children }) {
     setSearchType,
     recipesList,
     setRecipes,
+    backupList,
   };
 
   return (

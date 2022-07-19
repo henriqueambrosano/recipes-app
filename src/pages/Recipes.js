@@ -7,8 +7,6 @@ import RecepiesAppContext from '../context/RecepiesAppContext';
 
 function Recipes({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
-  // const recipes = recipesList.meals
-  //   ? recipesList.meals.filter((item, index) => index < +'12') : [];
   let recipes;
   if (!recipesList) {
     recipes = [];
@@ -16,6 +14,7 @@ function Recipes({ history }) {
     recipes = recipesList.meals
       ? recipesList.meals.filter((item, index) => index < +'12') : [];
   }
+
   return (
     <>
       <Header title="Foods" hasSearchBar history={ history } />
@@ -26,6 +25,8 @@ function Recipes({ history }) {
             name={ item.strMeal }
             index={ index }
             image={ item.strMealThumb }
+            path={ `foods/${item.idMeal}` }
+            history={ history }
           />
         ))
       }

@@ -17,12 +17,14 @@ function SearchBar({ title, history }) {
   };
 
   const checkErrors = (data, isItMeal) => {
+    console.log('enter');
     if (data === undefined || data[isItMeal] === null) {
       alertMessage();
-    } else if (!data) {
+    } else if (data) {
       if (!data[isItMeal]) {
         alertMessage();
       }
+      console.log(data[isItMeal]);
       if (data[isItMeal].length === 1) {
         if (isItMeal === 'drinks') {
           history.push(`/drinks/${data.drinks[0].idDrink}`);
