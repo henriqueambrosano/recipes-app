@@ -38,8 +38,18 @@
 }
 
 footer {
-  position: fixed;
   bottom: 0;
+  position: fixed;
+}
+
+.card {
+  border: none;
+  display: block;
+  margin: 10px;
+}
+
+.card img {
+  width: 200px;
 }
 
 

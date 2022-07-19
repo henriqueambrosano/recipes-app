@@ -24,6 +24,8 @@ function Drinks({ history }) {
             name={ item.strDrink }
             index={ index }
             image={ item.strDrinkThumb }
+            path={ `drinks/${item.idDrink}` }
+            history={ history }
           />
         ))
       }
