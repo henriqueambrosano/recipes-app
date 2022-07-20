@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
 import RecepiesAppContext from '../context/RecepiesAppContext';
+import CategoryButtons from '../components/CategoryButtons';
 
 function Recipes({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
@@ -18,6 +19,7 @@ function Recipes({ history }) {
   return (
     <>
       <Header title="Foods" hasSearchBar history={ history } />
+      <CategoryButtons title="Foods" />
       {
         recipes.map((item, index) => (
           <Card

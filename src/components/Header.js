@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
-import CategoryButtons from './CategoryButtons';
 
 function Header({ title, hasSearchBar, history }) {
   const [searchBarVisible, setSearchbar] = useState(false);
@@ -34,7 +33,6 @@ function Header({ title, hasSearchBar, history }) {
       )}
       <h1 data-testid="page-title">{title}</h1>
       {searchBarVisible && <SearchBar title={ title } history={ history } />}
-      <CategoryButtons title={ title } />
     </>
   );
 }
