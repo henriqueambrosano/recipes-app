@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeart from '../images/whiteHeartIcon.svg';
+import blackHeart from '../images/blackHeartIcon.svg';
 
-const DrinkDetailCard = ({ cardDetails }) => {
+const DrinkDetailCard = ({ cardDetails, path }) => {
+  console.log(cardDetails);
+  const [copied, setCopied] = useState('');
   const { strDrinkThumb, strDrink, strInstructions, strAlcoholic } = cardDetails;
+  const [favoriteRecipe, setFavoriteRecipe] = useState(false);
+
   const ingredientsKeys = Object.keys(cardDetails)
     .filter((item) => item.includes('Ingredient'));
   const measuresKeys = Object.keys(cardDetails)
@@ -11,6 +19,51 @@ const DrinkDetailCard = ({ cardDetails }) => {
     .filter((item) => item !== null);
   const measures = measuresKeys.map((item) => cardDetails[item])
     .filter((item) => item !== null);
+
+  const checkFavorite = () => {
+    if (localStorage.getItem('favoriteRecipes')) {
+      const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const isFavorite = favoriteRecipes.some((item) => item.id === cardDetails.idDrink);
+      setFavoriteRecipe(isFavorite);
+    }
+  };
+
+  useEffect(() => {
+    checkFavorite();
+  }, []);
+
+  const copyToClipboard = () => {
+    setCopied('Link copied!');
+    copy(`http://localhost:3000${path}`);
+  };
+
+  const setAsFavorite = () => {
+    const newFavorite = {
+      id: cardDetails.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: cardDetails.strCategory,
+      alcoholicOrNot: cardDetails.strAlcoholic,
+      name: cardDetails.strDrink,
+      image: cardDetails.strDrinkThumb,
+    };
+    if (localStorage.getItem('favoriteRecipes')) {
+      const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const isFavorite = favoriteRecipes.some((item) => item.id === cardDetails.idDrink);
+      if (isFavorite) {
+        const newFavorites = favoriteRecipes
+          .filter((recipe) => recipe.id !== cardDetails.idDrink);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+      } else {
+        localStorage
+          .setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, newFavorite]));
+      }
+    } else {
+      localStorage
+        .setItem('favoriteRecipes', JSON.stringify([newFavorite]));
+    }
+    checkFavorite();
+  };
 
   return (
     <>
@@ -21,6 +74,20 @@ const DrinkDetailCard = ({ cardDetails }) => {
         className="recipe-image"
       />
       <h1 data-testid="recipe-title">{strDrink}</h1>
+      <button type="button" data-testid="share-btn" onClick={ copyToClipboard }>
+        <img src={ shareIcon } alt="share-btn" />
+      </button>
+      <span>{copied}</span>
+      <button
+        type="button"
+        onClick={ setAsFavorite }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ favoriteRecipe ? blackHeart : whiteHeart }
+          alt="favorite-btn"
+        />
+      </button>
       <p data-testid="recipe-category">{strAlcoholic}</p>
       {ingredients.map((ingr, i) => (
         <p
@@ -31,15 +98,13 @@ const DrinkDetailCard = ({ cardDetails }) => {
         </p>
       ))}
       <p data-testid="instructions">{strInstructions}</p>
-      <div data-testid={ `${0}-recomendation-card` }>
-        Receitas Recomendadas
-      </div>
     </>
   );
 };
 
 DrinkDetailCard.propTypes = {
   cardDetails: PropTypes.shape().isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default DrinkDetailCard;
