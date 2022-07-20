@@ -6,7 +6,6 @@ import whiteHeart from '../images/whiteHeartIcon.svg';
 import blackHeart from '../images/blackHeartIcon.svg';
 
 const DrinkDetailCard = ({ cardDetails, path }) => {
-  console.log(cardDetails);
   const [copied, setCopied] = useState('');
   const { strDrinkThumb, strDrink, strInstructions, strAlcoholic } = cardDetails;
   const [favoriteRecipe, setFavoriteRecipe] = useState(false);
