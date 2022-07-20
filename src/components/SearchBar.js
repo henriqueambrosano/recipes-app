@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecepiesAppContext from '../context/RecepiesAppContext';
 import fetchRecipes from '../services/services';
+import { checkErrors, isItDrinkF, isItMealF } from '../services/helpers';
 
 function SearchBar({ title, history }) {
   const { setSearchType, searchType, setRecipes } = useContext(RecepiesAppContext);
@@ -10,29 +11,10 @@ function SearchBar({ title, history }) {
   const handleTextChange = ({ target }) => {
     setSearchInput(target.value);
   };
-  const isItDrink = title === 'Drinks' ? 'thecocktaildb' : 'themealdb';
+  const isItDrink = isItDrinkF(title);
 
   const alertMessage = () => {
     alert('Sorry, we haven\'t found any recipes for these filters.');
-  };
-
-  const checkErrors = (data, isItMeal) => {
-    console.log('enter');
-    if (data === undefined || data[isItMeal] === null) {
-      alertMessage();
-    } else if (data) {
-      if (!data[isItMeal]) {
-        alertMessage();
-      }
-      console.log(data[isItMeal]);
-      if (data[isItMeal].length === 1) {
-        if (isItMeal === 'drinks') {
-          history.push(`/drinks/${data.drinks[0].idDrink}`);
-        } else {
-          history.push(`/foods/${data.meals[0].idMeal}`);
-        }
-      }
-    }
   };
 
   const saveRecipes = async () => {
@@ -42,8 +24,8 @@ function SearchBar({ title, history }) {
     } else {
       const data = await fetchRecipes(`${searchType}${searchInput}`);
       setRecipes(data);
-      const isItMeal = title === 'Drinks' ? 'drinks' : 'meals';
-      checkErrors(data, isItMeal);
+      const isItMeal = isItMealF(title);
+      checkErrors(data, isItMeal, alertMessage, history);
     }
   };
 
