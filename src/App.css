@@ -52,6 +52,29 @@ footer {
   width: 200px;
 }
 
+.recipe-image {
+  width: 200px;
+}
+
+.recomendations-container {
+  display: flex;
+  overflow-x: scroll;
+  width: 250px;
+}
+
+.recomendation-item {
+  margin: 20px;
+  width: 50%;
+}
+
+.recomendation-item img {
+  height: 100px;
+}
+
+.btnRecipe {
+  bottom: 0;
+  position: fixed;
+}
 
 @keyframes shake {
 
