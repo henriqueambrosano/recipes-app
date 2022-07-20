@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecepiesAppContext from './RecepiesAppContext';
-// import { foodList, drinkList } from './mockRecipes';
 
 function Provider({ children }) {
   const [estado, setEstado] = useState({ email: '', password: '', isDisabled: true });

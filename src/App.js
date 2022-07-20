@@ -11,7 +11,6 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 import DrinkDetails from './pages/DrinkDetails';
-import DrinkInProgress from './pages/DrinkInProgress';
 
 function App() {
   return (
@@ -20,13 +19,13 @@ function App() {
       <Route exact path="/foods" component={ Recipes } />
       <Route
         path="/foods/:id/in-progress"
-        component={ RecipeInProgress }
+        render={ (props) => <RecipeInProgress props={ props } title="Foods" /> }
       />
       <Route path="/foods/:id" component={ RecipeDetails } />
       <Route exact path="/drinks" component={ Drinks } />
       <Route
         path="/drinks/:id/in-progress"
-        component={ DrinkInProgress }
+        render={ (props) => <RecipeInProgress props={ props } title="Drinks" /> }
       />
       <Route path="/drinks/:id" component={ DrinkDetails } />
       <Route path="/profile" component={ Profile } />
