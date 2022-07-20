@@ -169,6 +169,11 @@ describe('SearchBar component tests', () => {
     expect(pushMock).toHaveBeenCalledTimes(2);
     expect(pushMock).toHaveBeenCalledWith('/foods/24');
 
+    checkErrosMock({ oi: null }, 'drinks', window.alert, history);
+    checkErrosMock({ oi: null }, 'foods', window.alert, history);
+
+    expect(window.alert).toHaveBeenCalledTimes(4);
+
   })
   it('Testando a função isItDrinkF', () => {
     const isItDrinkMock = jest.spyOn(helpers, 'isItDrinkF');;

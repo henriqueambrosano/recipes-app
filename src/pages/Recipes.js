@@ -8,13 +8,9 @@ import CategoryButtons from '../components/CategoryButtons';
 
 function Recipes({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
-  let recipes;
-  if (!recipesList) {
-    recipes = [];
-  } else {
-    recipes = recipesList.meals
-      ? recipesList.meals.filter((item, index) => index < +'12') : [];
-  }
+  let recipes = [];
+  recipes = recipesList.meals
+    ? recipesList.meals.filter((item, index) => index < +'12') : [];
 
   return (
     <>

@@ -8,13 +8,9 @@ import CategoryButtons from '../components/CategoryButtons';
 
 function Drinks({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
-  let recipes;
-  if (!recipesList) {
-    recipes = [];
-  } else {
-    recipes = recipesList.drinks
-      ? recipesList.drinks.filter((item, index) => index < +'12') : [];
-  }
+  let recipes = [];
+  recipes = recipesList.drinks
+    ? recipesList.drinks.filter((item, index) => index < +'12') : [];
   return (
     <>
       <Header title="Drinks" hasSearchBar history={ history } />
