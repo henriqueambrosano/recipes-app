@@ -4,18 +4,31 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Profile({ history }) {
+  const emailStorage = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { email } = user;
+    return email;
+  };
+  const logout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('mealsToken');
+    localStorage.removeItem('cocktailsToken');
+    if (localStorage.getItem('doneRecipes')) {
+      localStorage.removeItem('doneRecipes');
+    }
+    if (localStorage.getItem('favoriteRecipes')) {
+      localStorage.removeItem('favoriteRecipes');
+    }
+    if (localStorage.getItem('inProgressRecipes')) {
+      localStorage.removeItem('inProgressRecipes');
+    }
+    history.push('/');
+  };
   return (
     <main>
       <Header title="Profile" hasSearchBar={ false } history={ history } />
       <section>
-        <label htmlFor="email">
-          User:
-          <input
-            type="email"
-            data-testid="profile-email"
-            name="email"
-          />
-        </label>
+        <p data-testid="profile-email">{emailStorage()}</p>
         <button
           type="button"
           data-testid="profile-done-btn"
@@ -33,7 +46,7 @@ function Profile({ history }) {
         <button
           type="button"
           data-testid="profile-logout-btn"
-          onClick={ () => history.push('/') }
+          onClick={ logout }
         >
           Logout
         </button>
