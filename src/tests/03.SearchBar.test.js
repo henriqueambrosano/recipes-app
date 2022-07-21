@@ -34,8 +34,7 @@ describe('SearchBar component tests', () => {
     userEvent.click(NAME_RADIO);
     userEvent.click(BTN_SEARCH);
 
-    const recipe1 = await screen.findByTestId('0-recipe-card');
-    expect(recipe1).toBeInTheDocument();
+    expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
 
     const DRINKS_GO = screen.getByTestId('drinks-bottom-btn');
     userEvent.click(DRINKS_GO); 

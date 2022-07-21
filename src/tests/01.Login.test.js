@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, cleanup, waitFor } from '@testing-library/react';
+import { screen, cleanup } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
