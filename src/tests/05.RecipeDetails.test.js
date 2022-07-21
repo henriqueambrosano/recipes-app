@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import copy from 'clipboard-copy';
 import App from '../App';
 
-describe('Login page tests', () => {
+describe('RecipeDetails page tests', () => {
   beforeEach(cleanup);
   it('Testar se somos redirecionados para a rota certa após o clique', async () => {
     const { history } = renderWithRouter(<App />);

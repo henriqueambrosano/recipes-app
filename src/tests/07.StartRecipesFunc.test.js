@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import copy from 'clipboard-copy';
 import App from '../App';
 
-describe('Login page tests', () => {
+describe('Start Recipe function tests', () => {
   beforeEach(cleanup);
   it('Testar componentes caso ja tenha algo no localStorage inProgressRecipes', async () => {
     const { history } = renderWithRouter(<App />);

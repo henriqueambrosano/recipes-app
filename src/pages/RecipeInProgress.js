@@ -15,6 +15,7 @@ function RecipeInProgress({ props: { history, match }, title }) {
   const mealType = title === 'Drinks' ? 'drink' : 'food';
   const enterData = title === 'Drinks' ? 'drinks' : 'meals';
   const recipeType = title === 'Drinks' ? 'cocktails' : 'meals';
+
   const initialLocalStorage = (ingredient) => (
     title === 'Drinks'
       ? { cocktails: { [match.params.id]: [ingredient] }, meals: {} }
@@ -107,7 +108,6 @@ function RecipeInProgress({ props: { history, match }, title }) {
   };
 
   const saveDoneRecipe = () => {
-    console.log(detailsRecipe);
     const recipeToSave = {
       id: detailsRecipe[`id${thumbNail}`],
       nationality: detailsRecipe.strArea ? detailsRecipe.strArea : '',
