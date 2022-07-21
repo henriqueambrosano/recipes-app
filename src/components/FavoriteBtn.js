@@ -14,13 +14,14 @@ function FavoriteBtn({ cardDetails, recipeType }) {
       const isFavorite = favoriteRecipes.some(
         (item) => item.id === cardDetails[idType],
       );
-      setFavoriteRecipe(isFavorite);
+      return isFavorite ? blackHeart : whiteHeart;
     }
+    return whiteHeart;
   };
 
   useEffect(() => {
-    checkFavorite(recipeType);
-  }, []);
+    if (favoriteRecipe) setFavoriteRecipe(false);
+  }, [favoriteRecipe]);
 
   const setAsFavorite = () => {
     const newFavorite = recipeType !== 'idDrink'
@@ -64,14 +65,15 @@ function FavoriteBtn({ cardDetails, recipeType }) {
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify([newFavorite]));
     }
-    checkFavorite(recipeType);
+    setFavoriteRecipe(true);
+    // checkFavorite(recipeType);
   };
 
   return (
     <button type="button" onClick={ setAsFavorite }>
       <img
         data-testid="favorite-btn"
-        src={ favoriteRecipe ? blackHeart : whiteHeart }
+        src={ checkFavorite(recipeType) }
         alt="favorite-btn"
       />
     </button>

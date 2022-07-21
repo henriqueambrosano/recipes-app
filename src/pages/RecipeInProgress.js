@@ -9,8 +9,10 @@ function RecipeInProgress({ props: { history, match }, title }) {
   const [detailsRecipe, setDetailsRecipe] = useState({});
   const [ingredientsFound, setIngredientsFound] = useState([]);
   const [measuresFound, setMeasuresFound] = useState([]);
+  const [endBtn, setEndBtn] = useState(true);
 
   const thumbNail = title === 'Drinks' ? 'Drink' : 'Meal';
+  const mealType = title === 'Drinks' ? 'drink' : 'food';
   const enterData = title === 'Drinks' ? 'drinks' : 'meals';
   const recipeType = title === 'Drinks' ? 'cocktails' : 'meals';
   const initialLocalStorage = (ingredient) => (
@@ -18,6 +20,21 @@ function RecipeInProgress({ props: { history, match }, title }) {
       ? { cocktails: { [match.params.id]: [ingredient] }, meals: {} }
       : { cocktails: { }, meals: { [match.params.id]: [ingredient] } }
   );
+
+  const endRecipe = () => {
+    if (localStorage
+      .getItem('inProgressRecipes') && JSON
+      .parse(localStorage.getItem('inProgressRecipes'))[recipeType][match.params.id]) {
+      setEndBtn(JSON.parse(localStorage
+        .getItem('inProgressRecipes'))[recipeType][match.params.id]
+        .length !== ingredientsFound.length);
+      console.log(JSON.parse(localStorage
+        .getItem('inProgressRecipes'))[recipeType][match.params.id]
+        .length);
+    } else {
+      setEndBtn(true);
+    }
+  };
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -46,6 +63,10 @@ function RecipeInProgress({ props: { history, match }, title }) {
     setMeasuresFound(measures);
   }, [detailsRecipe]);
 
+  useEffect(() => {
+    endRecipe();
+  }, [ingredientsFound]);
+
   const addIngredient = (ingredient) => {
     if (!localStorage.getItem('inProgressRecipes')) {
       localStorage.setItem(
@@ -73,6 +94,7 @@ function RecipeInProgress({ props: { history, match }, title }) {
       };
       localStorage.setItem('inProgressRecipes', JSON.stringify(finalObject));
     }
+    endRecipe();
   };
 
   const checkDisabled = (ingredient) => {
@@ -82,6 +104,35 @@ function RecipeInProgress({ props: { history, match }, title }) {
         .some((savedIngredients) => savedIngredients === ingredient);
     }
     return false;
+  };
+
+  const saveDoneRecipe = () => {
+    console.log(detailsRecipe);
+    const recipeToSave = {
+      id: detailsRecipe[`id${thumbNail}`],
+      nationality: detailsRecipe.strArea ? detailsRecipe.strArea : '',
+      name: detailsRecipe[`str${thumbNail}`],
+      category: detailsRecipe.strCategory,
+      doneDate: new Date().toDateString(),
+      image: detailsRecipe[`str${thumbNail}Thumb`],
+      alcoholicOrNot: detailsRecipe.strAlcoholic ? detailsRecipe.strAlcoholic : '',
+      type: mealType,
+      tags: detailsRecipe.strTags ? detailsRecipe.strTags
+        .replace(',', '').split(' ').slice(0, 2) : [''],
+    };
+
+    if (localStorage.getItem('doneRecipes')) {
+      const doneRecipes = [...JSON.parse(localStorage.getItem('doneRecipes'))];
+      const alreadyExist = doneRecipes
+        .some((item) => item.id === detailsRecipe[`id${thumbNail}`]);
+      if (!alreadyExist) {
+        doneRecipes.push(recipeToSave);
+        localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+      }
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify([recipeToSave]));
+    }
+    history.push('/done-recipes');
   };
 
   return (
@@ -97,7 +148,7 @@ function RecipeInProgress({ props: { history, match }, title }) {
           <h2 data-testid="recipe-title">{ detailsRecipe[`str${thumbNail}`] }</h2>
           <ShareBtn path={ history.location.pathname } />
           <FavoriteBtn
-            cardDetails=""
+            cardDetails={ detailsRecipe }
             recipeType={ title === 'Drinks' ? 'idDrink' : 'idMeal' }
           />
           <p data-testid="recipe-category">{detailsRecipe.strCategory}</p>
@@ -113,11 +164,19 @@ function RecipeInProgress({ props: { history, match }, title }) {
                 onClick={ () => addIngredient(ingredient) }
                 defaultChecked={ checkDisabled(ingredient) }
               />
-              {`${ingredient} - ${measuresFound[index]}`}
+              {`${ingredient} - ${measuresFound[index]}`.replace('- undefined', '')}
             </label>
           ))}
           <p data-testid="instructions">{detailsRecipe.strInstructions}</p>
-          <button type="button" data-testid="finish-recipe-btn">Finalizar receita</button>
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            disabled={ endBtn }
+            onClick={ saveDoneRecipe }
+          >
+            Finalizar receita
+
+          </button>
         </>
       )}
     </div>
