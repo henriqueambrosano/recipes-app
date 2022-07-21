@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MealDetailCard from '../components/MealDetailCard';
 import Recomendations from '../components/Recomendations';
 import fetchRecipes from '../services/services';
+import { inProgressRecipesF } from '../services/helpers';
 
 function RecipeDetails({ match, history }) {
   const [recipeDetail, setRecipeDetail] = useState(null);
@@ -41,9 +42,7 @@ function RecipeDetails({ match, history }) {
 
   const startRecipe = () => {
     const isLocalStorage = localStorage.getItem('inProgressRecipes');
-    const inProgressRecipes = isLocalStorage
-      ? JSON.parse(localStorage.getItem('inProgressRecipes'))
-      : { cocktails: {} };
+    const inProgressRecipes = inProgressRecipesF();
     if (isLocalStorage && JSON.parse(isLocalStorage).meals) {
       if (!Object.keys(inProgressRecipes.meals)
         .some((item) => item === match.params.id)) {

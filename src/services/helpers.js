@@ -24,3 +24,10 @@ export const isItDrinkF = (title) => (
 export const isItMealF = (title) => (
   title === 'Drinks' ? 'drinks' : 'meals'
 );
+
+export const inProgressRecipesF = () => {
+  const isLocalStorage = localStorage.getItem('inProgressRecipes');
+  return isLocalStorage
+    ? JSON.parse(localStorage.getItem('inProgressRecipes'))
+    : { cocktails: {} };
+};
