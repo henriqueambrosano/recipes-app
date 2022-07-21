@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Profile({ history }) {
-  const emailStorage = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const { email } = user;
-    return email;
-  };
+  const [savedEmail, setSavedEmail] = useState('');
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const { email } = user;
+      setSavedEmail(email);
+    }
+  }, []);
   const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('mealsToken');
@@ -28,7 +31,7 @@ function Profile({ history }) {
     <main>
       <Header title="Profile" hasSearchBar={ false } history={ history } />
       <section>
-        <p data-testid="profile-email">{emailStorage()}</p>
+        <p data-testid="profile-email">{savedEmail}</p>
         <button
           type="button"
           data-testid="profile-done-btn"

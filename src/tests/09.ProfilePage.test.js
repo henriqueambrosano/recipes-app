@@ -73,8 +73,8 @@ describe('60 - Testes da página de profile', () => {
         userEvent.click(btnProfile);
         expect(history.location.pathname).toBe('/profile');
 
-        // const save = JSON.parse(localStorage.getItem('user'));
-        // expect(save).toStrictEqual({email: "email@email.com"});
+        const save = JSON.parse(localStorage.getItem('user'));
+        expect(save).toStrictEqual({email: "email@email.com"});
         const logout = screen.getByTestId(/profile-logout-btn/);
         userEvent.click(logout);
         expect(history.location.pathname).toBe('/');

@@ -7,7 +7,7 @@ function Login({ history }) {
     estado: { email, password, isDisabled } } = useContext(RecepiesAppContext);
 
   const handleValidation = () => {
-    const PASSWORD_LENGTH = 5;
+    const PASSWORD_LENGTH = 6;
     // regex obtido através de:
     // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail
     const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;

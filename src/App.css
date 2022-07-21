@@ -76,6 +76,10 @@ footer {
   position: fixed;
 }
 
+.no-border {
+  border: none;
+}
+
 @keyframes shake {
 
   0% {
