@@ -3,9 +3,6 @@ import renderWithRouter from './renderWithRouter';
 import { screen } from '@testing-library/react'; 
 import userEvent from '@testing-library/user-event'
 import App from '../App';
-import Provider from '../context/Provider'
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 
 describe('60 - Testes da página de profile', () => {
     test('Testar se todos o data-testid do email e de todos os botões ', () => {
@@ -76,10 +73,12 @@ describe('60 - Testes da página de profile', () => {
         userEvent.click(btnProfile);
         expect(history.location.pathname).toBe('/profile');
 
+        // const save = JSON.parse(localStorage.getItem('user'));
+        // expect(save).toStrictEqual({email: "email@email.com"});
         const logout = screen.getByTestId(/profile-logout-btn/);
         userEvent.click(logout);
         expect(history.location.pathname).toBe('/');
-        const save = localStorage.getItem('user');
-        expect(save).toBe(null);
+        const save2 = JSON.parse(localStorage.getItem('user'));
+        expect(save2).toBe(null);
     })
 })
