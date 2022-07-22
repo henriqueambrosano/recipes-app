@@ -46,8 +46,7 @@ describe('SearchBar component tests', () => {
     userEvent.click(NAME_RADIO);
     userEvent.click(BTN_SEARCH);
 
-    const recipe2 = await screen.findByTestId('1-recipe-card');
-    expect(recipe2).toBeInTheDocument();
+    expect(await screen.findByTestId('1-recipe-card')).toBeInTheDocument();
   });
   it('Testar se o alert é chamado', async () => {
     window.alert = jest.fn().mockResolvedValue(() => {});

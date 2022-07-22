@@ -2,6 +2,7 @@ import React from 'react';
 import renderWithRouter from './renderWithRouter'; 
 import { screen } from '@testing-library/react'; 
 import userEvent from '@testing-library/user-event'
+import { DONE_MOCK } from './mocks/mocks';
 import App from '../App';
 
 describe('60 - Testes da página de profile', () => {
@@ -19,6 +20,7 @@ describe('60 - Testes da página de profile', () => {
 
         const emailProfile = screen.getByTestId(/profile-email/);
         expect(emailProfile).toBeInTheDocument();
+        expect(emailProfile).toHaveTextContent('email@email.com')
         const doneRecipe = screen.getByTestId(/profile-done-btn/);
         expect(doneRecipe).toBeInTheDocument();
         const favoriteRecipes = screen.getByTestId(/profile-favorite-btn/);
@@ -80,5 +82,33 @@ describe('60 - Testes da página de profile', () => {
         expect(history.location.pathname).toBe('/');
         const save2 = JSON.parse(localStorage.getItem('user'));
         expect(save2).toBe(null);
+    })
+    test('Testa se o localStorage', async () => {
+        jest.spyOn(Storage.prototype, 'setItem');
+        jest.spyOn(Storage.prototype, 'getItem');
+        localStorage.setItem('inProgressRecipes', JSON.stringify({"cocktails":{},"meals":{"52977":[]}}))
+        localStorage.setItem('doneRecipes', JSON.stringify(DONE_MOCK));
+        localStorage.setItem('favoriteRecipes', JSON.stringify(DONE_MOCK));
+        const { history } = renderWithRouter(<App />);
+    
+        console.log(JSON.parse(localStorage.getItem('user')));
+        history.push('/profile');
+        
+        const emailProfile = await screen.findByTestId(/profile-email/);
+
+        const logout = screen.getByTestId(/profile-logout-btn/);
+
+        expect(JSON.parse(localStorage.getItem('inProgressRecipes'))).toStrictEqual({"cocktails":{},"meals":{"52977":[]}})
+        expect(JSON.parse(localStorage.getItem('doneRecipes'))).toStrictEqual(DONE_MOCK);
+        expect(JSON.parse(localStorage.getItem('favoriteRecipes'))).toStrictEqual(DONE_MOCK);
+
+        expect(emailProfile).toBeInTheDocument();
+        expect(emailProfile).toHaveTextContent('');
+
+        userEvent.click(logout);
+
+        expect(localStorage.getItem('inProgressRecipes')).toBe(null);
+        expect(localStorage.getItem('doneRecipes')).toBe(null);
+        expect(localStorage.getItem('favoriteRecipes')).toBe(null);
     })
 })

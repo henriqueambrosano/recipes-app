@@ -53,3 +53,5 @@ export const mountNewObject = (cardDetails, recipeType) => (
       image: cardDetails.strDrinkThumb,
     }
 );
+
+export const setFilter = ({ target }, setBtnFilter) => setBtnFilter(target.value);
