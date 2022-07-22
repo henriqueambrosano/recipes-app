@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import FavoriteCard from '../components/FavoriteCard';
 // import DoneRecipeCard from '../components/DoneRecipeCard';
 // import CategoryButtons from '../components/CategoryButtons';
 
-function FavoriteRecipes() {
+function FavoriteRecipes({ history }) {
   const [favoriteRecipes, setFavorites] = useState([]);
+  const [btnFilter, setBtnFilter] = useState('All');
+
+  const setFilter = ({ target }) => {
+    const { value } = target;
+    setBtnFilter(value);
+  };
+
   useEffect(() => {
     if (localStorage.getItem('favoriteRecipes')) {
       const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -23,6 +31,7 @@ function FavoriteRecipes() {
             type="radio"
             name="filterBtn"
             value="All"
+            onClick={ setFilter }
           />
         </label>
         <label htmlFor="FoodBtn" data-testid="filter-by-food-btn">
@@ -32,6 +41,7 @@ function FavoriteRecipes() {
             type="radio"
             name="filterBtn"
             value="food"
+            onClick={ setFilter }
           />
         </label>
         <label htmlFor="DrinkBtn" data-testid="filter-by-drink-btn">
@@ -41,16 +51,27 @@ function FavoriteRecipes() {
             type="radio"
             name="filterBtn"
             value="drink"
+            onClick={ setFilter }
           />
         </label>
       </div>
       {
-        favoriteRecipes.map((recipe, index) => (
-          <FavoriteCard key={ index } recipe={ recipe } index={ index } />
-        ))
+        favoriteRecipes.filter((item) => item.type === btnFilter || btnFilter === 'All')
+          .map((recipe, index) => (
+            <FavoriteCard
+              history={ history }
+              key={ index }
+              recipe={ recipe }
+              index={ index }
+            />
+          ))
       }
     </>
   );
 }
+
+FavoriteRecipes.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
 
 export default FavoriteRecipes;
