@@ -15,8 +15,6 @@ export const checkErrors = (data, isItMeal, alertMessage, history) => {
   }
 };
 
-export const add = '';
-
 export const isItDrinkF = (title) => (
   title === 'Drinks' ? 'thecocktaildb' : 'themealdb'
 );
@@ -53,5 +51,3 @@ export const mountNewObject = (cardDetails, recipeType) => (
       image: cardDetails.strDrinkThumb,
     }
 );
-
-export const setFilter = ({ target }, setBtnFilter) => setBtnFilter(target.value);
