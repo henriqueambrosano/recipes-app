@@ -31,3 +31,25 @@ export const inProgressRecipesF = () => {
     ? JSON.parse(localStorage.getItem('inProgressRecipes'))
     : { cocktails: {} };
 };
+
+export const mountNewObject = (cardDetails, recipeType) => (
+  recipeType !== 'idDrink'
+    ? {
+      id: cardDetails.idMeal,
+      type: 'food',
+      nationality: cardDetails.strArea,
+      category: cardDetails.strCategory,
+      alcoholicOrNot: '',
+      name: cardDetails.strMeal,
+      image: cardDetails.strMealThumb,
+    }
+    : {
+      id: cardDetails.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: cardDetails.strCategory,
+      alcoholicOrNot: cardDetails.strAlcoholic,
+      name: cardDetails.strDrink,
+      image: cardDetails.strDrinkThumb,
+    }
+);

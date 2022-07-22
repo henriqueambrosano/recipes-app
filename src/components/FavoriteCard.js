@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ShareBtn from './ShareBtn';
 import FavoriteBtn from './FavoriteBtn';
 
-function FavoriteCard({ recipe, index }) {
+function FavoriteCard({ recipe, index, history }) {
   const [isFavorited, setIsFavorite] = useState(true);
   const verifieFavorite = () => {
     setIsFavorite(false);
@@ -14,13 +14,30 @@ function FavoriteCard({ recipe, index }) {
       { isFavorited
         && (
           <div>
-            <image src={ image } data-testid={ `${index}-horizontal-image` } />
+            <button
+              type="button"
+              className="no-border"
+              onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
+            >
+              <img
+                src={ image }
+                alt={ recipe.name }
+                className="recipe-image"
+                data-testid={ `${index}-horizontal-image` }
+              />
+            </button>
             <h6
               data-testid={ `${index}-horizontal-top-text` }
             >
               {`${nationality}${alcoholicOrNot} - ${category}`}
             </h6>
-            <h6 data-testid={ `${index}-horizontal-name` }>{name}</h6>
+            <button
+              type="button"
+              className="no-border"
+              onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
+            >
+              <h6 data-testid={ `${index}-horizontal-name` }>{name}</h6>
+            </button>
             <ShareBtn index={ { index } } path={ `/${type}s/${id}` } />
             <button type="button" onClick={ verifieFavorite } className="no-border">
               <FavoriteBtn cardDetails={ recipe } index={ index } recipeType={ type } />
@@ -34,7 +51,7 @@ function FavoriteCard({ recipe, index }) {
 FavoriteCard.propTypes = {
   recipe: PropTypes.shape().isRequired,
   index: PropTypes.number.isRequired,
-//   history: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default FavoriteCard;

@@ -24,28 +24,30 @@ function FavoriteBtn({ cardDetails, index, recipeType }) {
     if (favoriteRecipe) setFavoriteRecipe(false);
   }, [favoriteRecipe]);
 
+  const testObject = recipeType !== 'idDrink'
+    ? {
+      id: cardDetails.idMeal,
+      type: 'food',
+      nationality: cardDetails.strArea,
+      category: cardDetails.strCategory,
+      alcoholicOrNot: '',
+      name: cardDetails.strMeal,
+      image: cardDetails.strMealThumb,
+    }
+    : {
+      id: cardDetails.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: cardDetails.strCategory,
+      alcoholicOrNot: cardDetails.strAlcoholic,
+      name: cardDetails.strDrink,
+      image: cardDetails.strDrinkThumb,
+    };
+
   const setAsFavorite = () => {
     let newFavorite;
     if (hasFoodOrDrink) {
-      newFavorite = recipeType !== 'idDrink'
-        ? {
-          id: cardDetails.idMeal,
-          type: 'food',
-          nationality: cardDetails.strArea,
-          category: cardDetails.strCategory,
-          alcoholicOrNot: '',
-          name: cardDetails.strMeal,
-          image: cardDetails.strMealThumb,
-        }
-        : {
-          id: cardDetails.idDrink,
-          type: 'drink',
-          nationality: '',
-          category: cardDetails.strCategory,
-          alcoholicOrNot: cardDetails.strAlcoholic,
-          name: cardDetails.strDrink,
-          image: cardDetails.strDrinkThumb,
-        };
+      newFavorite = testObject;
     } else {
       newFavorite = cardDetails;
     }
