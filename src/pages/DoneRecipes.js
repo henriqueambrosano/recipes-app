@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import DoneRecipeCard from '../components/DoneRecipeCard';
 import Header from '../components/Header';
+import useDoneRecipesStorage from '../hooks/useDoneRecipesStorage';
+import useBtnFilter from '../hooks/useBtnFilter';
 
 function DoneRecipes({ history }) {
-  const [btnFilter, setBtnFilter] = useState('All');
-  const [doneRecipes, setDoneRecipes] = useState([]);
+  const { btnFilter, setBtnFilter } = useBtnFilter();
+  const { doneRecipes } = useDoneRecipesStorage();
 
   const setFilter = ({ target }) => setBtnFilter(target.value);
-
-  useEffect(() => {
-    if (localStorage.getItem('doneRecipes')) {
-      setDoneRecipes(JSON.parse(localStorage.getItem('doneRecipes')));
-    }
-  }, []);
 
   return (
     <>

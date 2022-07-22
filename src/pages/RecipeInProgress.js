@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FavoriteBtn from '../components/FavoriteBtn';
 import ShareBtn from '../components/ShareBtn';
-import fetchRecipes from '../services/services';
-import { isItDrinkF } from '../services/helpers';
+import useDetailRecipe from '../hooks/useDetailRecipe';
+import useIngredientsMeasures from '../hooks/useIngredientsMeasures';
 
 function RecipeInProgress({ props: { history, match }, title }) {
-  const [detailsRecipe, setDetailsRecipe] = useState({});
-  const [ingredientsFound, setIngredientsFound] = useState([]);
-  const [measuresFound, setMeasuresFound] = useState([]);
+  const { detailsRecipe } = useDetailRecipe(match, title);
   const [endBtn, setEndBtn] = useState(true);
+  const { ingredientsFound, measuresFound } = useIngredientsMeasures(detailsRecipe);
 
   const thumbNail = title === 'Drinks' ? 'Drink' : 'Meal';
   const mealType = title === 'Drinks' ? 'drink' : 'food';
-  const enterData = title === 'Drinks' ? 'drinks' : 'meals';
   const recipeType = title === 'Drinks' ? 'cocktails' : 'meals';
 
   const initialLocalStorage = (ingredient) => (
@@ -36,33 +34,6 @@ function RecipeInProgress({ props: { history, match }, title }) {
       setEndBtn(true);
     }
   };
-
-  useEffect(() => {
-    const fetchDetails = async () => {
-      const details = await fetchRecipes(
-        `https://www.${isItDrinkF(title)}.com/api/json/v1/1/lookup.php?i=${
-          match.params.id
-        }`,
-      );
-      setDetailsRecipe(details[enterData][0]);
-    };
-    fetchDetails();
-  }, []);
-
-  useEffect(() => {
-    const ingredientsKeys = Object.keys(detailsRecipe)
-      .filter((item) => item.includes('Ingredient'));
-    const measuresKeys = Object.keys(detailsRecipe)
-      .filter((item) => item.includes('Measure'));
-    const ingredients = ingredientsKeys
-      .map((item) => detailsRecipe[item])
-      .filter((item) => item !== '' && item !== null);
-    const measures = measuresKeys
-      .map((item) => detailsRecipe[item])
-      .filter((item) => item !== '' && item !== null);
-    setIngredientsFound(ingredients);
-    setMeasuresFound(measures);
-  }, [detailsRecipe]);
 
   useEffect(() => {
     endRecipe();

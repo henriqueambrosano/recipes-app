@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import useProfileEffects from '../hooks/useProfileEffects';
 
 function Profile({ history }) {
-  const [savedEmail, setSavedEmail] = useState('');
-  useEffect(() => {
-    if (localStorage.getItem('user')) {
-      const user = JSON.parse(localStorage.getItem('user'));
-      const { email } = user;
-      setSavedEmail(email);
-    }
-  }, []);
+  const { savedEmail } = useProfileEffects();
+
   const logout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('mealsToken');
