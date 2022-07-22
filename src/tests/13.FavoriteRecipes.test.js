@@ -6,7 +6,7 @@ import App from '../App';
 import { FAVORITE_MOCK, MOCK_MEAL_DETAILS, MOCK_DRINK_DETAILS } from './mocks/mocks'
 const helpers = require('../services/helpers');
 
-describe('RecipeInProgress page tests', () => {
+describe('favoriteRecipes page tests', () => {
   beforeEach(cleanup);
   it('Testar componentes caso ja tenha não tenha nada no localStorage', async () => {
     const { history } = renderWithRouter(<App />);
