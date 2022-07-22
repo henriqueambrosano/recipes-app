@@ -6,12 +6,8 @@ import Header from '../components/Header';
 function DoneRecipes({ history }) {
   const [btnFilter, setBtnFilter] = useState('All');
   const [doneRecipes, setDoneRecipes] = useState([]);
-  console.log(btnFilter);
 
-  const setFilter = ({ target }) => {
-    const { value } = target;
-    setBtnFilter(value);
-  };
+  const setFilter = ({ target }) => setBtnFilter(target.value);
 
   useEffect(() => {
     if (localStorage.getItem('doneRecipes')) {

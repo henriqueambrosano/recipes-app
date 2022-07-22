@@ -6,7 +6,7 @@ import App from '../App';
 
 describe('RecipeInProgress page tests', () => {
   beforeEach(cleanup);
-  it.only('Testar componentes caso ja tenha não tenha nada no localStorage', async () => {
+  it('Testar componentes caso ja tenha não tenha nada no localStorage', async () => {
     const { history } = renderWithRouter(<App />);
   
     history.push('/drinks/17222/in-progress');
