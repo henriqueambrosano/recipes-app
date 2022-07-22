@@ -1,43 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import DrinkDetailCard from '../components/DrinkDetailCard';
-import fetchRecipes from '../services/services';
 import Recomendations from '../components/Recomendations';
+import useFetchDetails from '../hooks/useFetchDetails';
+import useDoneRecipesStorage from '../hooks/useDoneRecipesStorage';
+import useDetailsStorage from '../hooks/useDetailsStorage';
 
 function DrinkDetails({ match, history }) {
-  const [recipeDetail, setRecipeDetail] = useState(null);
-  const [recomendedMeals, setRecomendedMeals] = useState(null);
-  const [doneRecipes, setDoneRecipes] = useState([]);
-  const [btnName, setBtnName] = useState('Start Recipe');
-
-  useEffect(() => {
-    const fetchDetails = () => {
-      fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${match.params.id}`)
-        .then((response) => response.json())
-        .then((data) => setRecipeDetail(data));
-    };
-    const fetchRecomendations = async () => {
-      const recomendedRecipes = await fetchRecipes('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      setRecomendedMeals(recomendedRecipes.meals.filter((item, i) => i < +'6'));
-    };
-    fetchRecomendations();
-    fetchDetails();
-  }, []);
-
-  useEffect(() => {
-    if (localStorage.getItem('doneRecipes')) {
-      const checkDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-      setDoneRecipes(checkDoneRecipes);
-    }
-    if (localStorage.getItem('inProgressRecipes')) {
-      const checkProgressRecipes = JSON.parse(
-        localStorage.getItem('inProgressRecipes'),
-      ).cocktails;
-      if (Object.keys(checkProgressRecipes).some((item) => item === match.params.id)) {
-        setBtnName('Continue Recipe');
-      }
-    }
-  }, []);
+  const { recomendedMeals, recipeDetail } = useFetchDetails(match);
+  const { btnName } = useDetailsStorage(match);
+  const { doneRecipes } = useDoneRecipesStorage();
 
   const startRecipe = () => {
     const isLocalStorage = localStorage.getItem('inProgressRecipes');

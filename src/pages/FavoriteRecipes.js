@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import FavoriteCard from '../components/FavoriteCard';
-// import DoneRecipeCard from '../components/DoneRecipeCard';
-// import CategoryButtons from '../components/CategoryButtons';
+import useBtnFilter from '../hooks/useBtnFilter';
+import useFavoriteStorage from '../hooks/useFavoriteStorage';
 
 function FavoriteRecipes({ history }) {
-  const [favoriteRecipes, setFavorites] = useState([]);
-  const [btnFilter, setBtnFilter] = useState('All');
-
+  const { btnFilter, setBtnFilter } = useBtnFilter();
+  const { favoriteRecipes } = useFavoriteStorage();
   const setFilter = ({ target }) => {
     const { value } = target;
     setBtnFilter(value);
   };
 
-  useEffect(() => {
-    if (localStorage.getItem('favoriteRecipes')) {
-      const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      setFavorites(favorites);
-    }
-  }, []);
   return (
     <>
       <Header title="Favorite Recipes" hasSearchBar={ false } />
