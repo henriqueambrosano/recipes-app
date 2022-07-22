@@ -6,12 +6,12 @@ import App from '../App';
 import { FAVORITE_MOCK, MOCK_MEAL_DETAILS, MOCK_DRINK_DETAILS } from './mocks/mocks'
 const helpers = require('../services/helpers');
 
-describe('RecipeInProgress page tests', () => {
+describe('favoriteRecipes page tests', () => {
   beforeEach(cleanup);
   it('Testar componentes caso ja tenha não tenha nada no localStorage', async () => {
     const { history } = renderWithRouter(<App />);
 
-    history.push('/done-recipes');
+    history.push('/favorite-recipes');
 
     const PROFILE_ICON = screen.getByTestId('profile-top-btn');
     const PAGE_TITLE = screen.getByTestId('page-title');
@@ -31,9 +31,9 @@ describe('RecipeInProgress page tests', () => {
     jest.spyOn(Storage.prototype, 'setItem')
     jest.spyOn(Storage.prototype, 'getItem')
   
-    localStorage.setItem('doneRecipes', JSON.stringify(FAVORITE_MOCK))
+    localStorage.setItem('favoriteRecipes', JSON.stringify(FAVORITE_MOCK))
 
-    history.push('/done-recipes');
+    history.push('/favorite-recipes');
 
     const PROFILE_ICON = screen.getByTestId('profile-top-btn');
     const PAGE_TITLE = screen.getByTestId('page-title');
@@ -45,12 +45,13 @@ describe('RecipeInProgress page tests', () => {
     const FIRST_TITLE =  await screen.findByTestId('0-horizontal-top-text');
     const FIRST_NAME =  await screen.findByTestId('0-horizontal-name');
     const SHARE_BTN =  await screen.findByTestId('0-horizontal-share-btn');
+    const FAV_BTN =  await screen.findByTestId('0-horizontal-favorite-btn');
 
     const SECOND_RECIPE =  await screen.findByTestId('0-horizontal-image');
     const SECOND_TITLE =  await screen.findByTestId('0-horizontal-top-text');
     const SECOND_NAME =  await screen.findByTestId('0-horizontal-name');
     const SECOND_SHARE_BTN =  await screen.findByTestId('0-horizontal-share-btn');
-
+    const SECOND_FAV_BTN =  await screen.findByTestId('0-horizontal-favorite-btn');
 
 
     const COMPONENTS = [
@@ -63,10 +64,12 @@ describe('RecipeInProgress page tests', () => {
       FIRST_TITLE,
       FIRST_NAME,
       SHARE_BTN,
+      FAV_BTN,
       SECOND_RECIPE,
       SECOND_TITLE,
       SECOND_NAME,
       SECOND_SHARE_BTN,
+      SECOND_FAV_BTN,
     ];
 
     COMPONENTS.forEach((component) => {

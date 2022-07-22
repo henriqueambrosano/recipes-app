@@ -28,22 +28,26 @@ export const DONE_MOCK = [
 
 export const FAVORITE_MOCK = [
   {
-    "id":"52977",
-    "type":"food",
+    "id":"52978",
     "nationality":"Turkish",
+    "name":"Kumpir",
     "category":"Side",
+    "doneDate":new Date().toDateString(),
+    "image":"https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg",
     "alcoholicOrNot":"",
-    "name":"Corba",
-    "image":"https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    "type":"food",
+    "tags":["SideDish"]
   },
   {
-    "id":"17222",
+    "id":"52978",
+    "nationality":"Turkish",
+    "name":"VODKA",
+    "category":"Side",
+    "doneDate":new Date().toDateString(),
+    "image":"https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg",
+    "alcoholicOrNot":"",
     "type":"drink",
-    "nationality":"",
-    "category":"Cocktail",
-    "alcoholicOrNot":"Alcoholic",
-    "name":"A1",
-    "image":"https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg"
+    "tags":["SideDish"]
   }
 ]
 

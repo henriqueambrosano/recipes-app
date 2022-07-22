@@ -11,9 +11,9 @@ describe('Local storage tests', () => {
     const { history } = renderWithRouter(<App />);
     jest.spyOn(Storage.prototype, 'setItem')
     jest.spyOn(Storage.prototype, 'getItem')
-    localStorage.setItem('doneRecipes', JSON.stringify([{"id":"52977"}]))
+    localStorage.setItem('doneRecipes', JSON.stringify([{"id":"15997"}]))
 
-    history.push('/foods/52977/');
+    history.push('/drinks/15997/');
 
     const firstFood = await screen.findByTestId('recipe-title');
 
