@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecepiesAppContext from '../context/RecepiesAppContext';
+import logo from '../images/logo.svg';
 
 function Login({ history }) {
   const { setEstado,
@@ -37,37 +38,37 @@ function Login({ history }) {
   };
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <label htmlFor="email">
-        Email:
+    <main className="login__page">
+      <img className="login__page__logo" alt="logo" src={ logo } />
+      <form className="login__page__forms" onSubmit={ handleSubmit }>
         <input
+          className="login__page__forms__email"
           type="email"
           data-testid="email-input"
           name="email"
-          placeholder="user@email.com"
+          placeholder="Email"
           onChange={ handleChange }
           value={ email }
         />
-      </label>
-      <label htmlFor="password">
-        Password:
         <input
+          className="login__page__forms__password"
           type="password"
           data-testid="password-input"
           name="password"
-          placeholder="******"
+          placeholder="Password"
           onChange={ handleChange }
           value={ password }
         />
-      </label>
-      <button
-        type="submit"
-        data-testid="login-submit-btn"
-        disabled={ isDisabled }
-      >
-        Enter
-      </button>
-    </form>
+        <button
+          type="submit"
+          className="login__page__forms__button"
+          data-testid="login-submit-btn"
+          disabled={ isDisabled }
+        >
+          Enter
+        </button>
+      </form>
+    </main>
   );
 }
 
