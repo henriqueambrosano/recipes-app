@@ -1,0 +1,116 @@
+.login__page {
+  background-color: #DC143C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__logo {
+    width: 350px;
+  }
+
+  &__forms__email, &__forms__password {
+    border: 1px solid black;
+    margin-bottom: 15px;
+    padding: 5px;
+    width: 250px;
+  }
+
+  &__forms__password {
+    margin-bottom: 60px;
+  }
+
+  &__forms__button {
+    border: none;
+    background-color: #000000;
+    border-radius: 10px;
+    color: #DC143C;
+    width: 150px;
+    padding: 5px 0;
+    font-weight: 1000;
+    transition: .2s;
+    letter-spacing: 1px;
+    margin-bottom: 80px;
+    height: 30px;
+    position: relative;
+    top: 0px;
+  }
+
+  &__forms__button:hover {
+    top: -2px;
+    background-color: #0a0a0a;
+    cursor: pointer;
+  }
+  &__forms__button:disabled {
+    top: -2px;
+    opacity: 50%;
+  }
+}
+
+@media screen and (min-width:1100px) {
+  .login__page {
+    background-color: #DC143C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+  
+    &__forms {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    &__logo {
+      width: 500px;
+    }
+  
+    &__forms__email, &__forms__password {
+      border: 1px solid black;
+      margin-bottom: 30px;
+      padding: 5px;
+      width: 400px;
+    }
+  
+    &__forms__password {
+      margin-bottom: 80px;
+    }
+  
+    &__forms__button {
+      border: none;
+      background-color: #000000;
+      border-radius: 10px;
+      color: #DC143C;
+      width: 250px;
+      font-size: 24px;
+      padding: 5px 0;
+      font-weight: 1000;
+      transition: .2s;
+      letter-spacing: 1px;
+      margin-bottom: 260px;
+      height: 50px;
+      position: relative;
+      top: 0px;
+    }
+  
+    &__forms__button:hover {
+      top: -2px;
+      background-color: #0a0a0a;
+      cursor: pointer;
+    }
+    &__forms__button:disabled {
+      top: -2px;
+      opacity: 50%;
+    }
+  }
+}
