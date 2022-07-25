@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
 import RecepiesAppContext from '../context/RecepiesAppContext';
 import CategoryButtons from '../components/CategoryButtons';
+import SearchBar from '../components/SearchBar';
 
 function Recipes({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
+  const [searchBarVisible, setSearchbar] = useState(false);
+
   let recipes = [];
   recipes = recipesList.meals
     ? recipesList.meals.filter((item, index) => index < +'12') : [];
@@ -28,6 +31,12 @@ function Recipes({ history }) {
           />
         ))
       }
+      {searchBarVisible && <SearchBar
+        title="Foods"
+        history={ history }
+        searchBarVisible={ searchBarVisible }
+        setSearchbar={ setSearchbar }
+      />}
       <Footer history={ history } />
     </>
   );

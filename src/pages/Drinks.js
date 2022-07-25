@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
 import RecepiesAppContext from '../context/RecepiesAppContext';
 import CategoryButtons from '../components/CategoryButtons';
+import SearchBar from '../components/SearchBar';
 
 function Drinks({ history }) {
   const { recipesList } = useContext(RecepiesAppContext);
+  const [searchBarVisible, setSearchbar] = useState(false);
+
   let recipes = [];
   recipes = recipesList.drinks
     ? recipesList.drinks.filter((item, index) => index < +'12') : [];
@@ -15,6 +18,12 @@ function Drinks({ history }) {
     <>
       <Header title="Drinks" hasSearchBar history={ history } />
       <CategoryButtons title="Drinks" />
+      {searchBarVisible && <SearchBar
+        title="Drinks"
+        history={ history }
+        searchBarVisible={ searchBarVisible }
+        setSearchbar={ setSearchbar }
+      />}
       {
         recipes.map((item, index) => (
           <Card

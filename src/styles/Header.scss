@@ -1,0 +1,17 @@
+@import './global_variables.scss';
+
+.component__header {
+  background-color: $primary-color;
+  display: flex;
+  justify-content: space-between;
+  font-size: $medium-font-size;
+
+  &__profile__btn, &__search__btn {
+    border: none;
+    background-color: $primary-color;
+  }
+}
+
+@media screen and (min-width:1100px) {
+
+}

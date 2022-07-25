@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import FavoriteCard from '../components/FavoriteCard';
 import useBtnFilter from '../hooks/useBtnFilter';
 import useFavoriteStorage from '../hooks/useFavoriteStorage';
+import SearchBar from '../components/SearchBar';
 
 function FavoriteRecipes({ history }) {
   const { btnFilter, setBtnFilter } = useBtnFilter();
+  const [searchBarVisible, setSearchbar] = useState(false);
+
   const { favoriteRecipes } = useFavoriteStorage();
   const setFilter = ({ target }) => {
     const { value } = target;
@@ -47,6 +50,12 @@ function FavoriteRecipes({ history }) {
             onClick={ setFilter }
           />
         </label>
+        {searchBarVisible && <SearchBar
+          title="Favorite Recipes"
+          history={ history }
+          searchBarVisible={ searchBarVisible }
+          setSearchbar={ setSearchbar }
+        />}
       </div>
       {
         favoriteRecipes.filter((item) => item.type === btnFilter || btnFilter === 'All')
