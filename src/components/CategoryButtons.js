@@ -33,25 +33,38 @@ function CategoryButtons({ title }) {
     setRecipes((prevState) => ({ ...prevState, [objectKey]: categoryList[objectKey] }));
   };
 
+  const backToAll = () => {
+    setRecipes(backupList);
+    setLastCategory('All');
+  };
+
   return (
     <>
-      {categories.map((category) => (
+      <section className="component__category">
+        {categories.map((category) => (
+          <button
+            className={ `component__category__btn__general__${
+              lastCategory === category.strCategory ? 'on' : 'off'
+            }` }
+            key={ category.strCategory }
+            type="button"
+            data-testid={ `${category.strCategory}-category-filter` }
+            onClick={ () => filterByCategory(category.strCategory) }
+          >
+            {category.strCategory}
+          </button>
+        ))}
+      </section>
+      <section className="set__all">
         <button
-          key={ category.strCategory }
           type="button"
-          data-testid={ `${category.strCategory}-category-filter` }
-          onClick={ () => filterByCategory(category.strCategory) }
+          className="set__all__btn__all"
+          data-testid="All-category-filter"
+          onClick={ backToAll }
         >
-          {category.strCategory}
+          All
         </button>
-      ))}
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ () => setRecipes(backupList) }
-      >
-        All
-      </button>
+      </section>
     </>
   );
 }

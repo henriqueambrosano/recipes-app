@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import useProfileEffects from '../hooks/useProfileEffects';
-import SearchBar from '../components/SearchBar';
 
 function Profile({ history }) {
   const { savedEmail } = useProfileEffects();
-  const [searchBarVisible, setSearchbar] = useState(false);
 
   const logout = () => {
     localStorage.removeItem('user');
@@ -26,7 +24,10 @@ function Profile({ history }) {
   };
   return (
     <main>
-      <Header title="Profile" hasSearchBar={ false } history={ history } />
+      <div className="top__container">
+
+        <Header title="Profile" hasSearchBar={ false } history={ history } />
+      </div>
       <section>
         <p data-testid="profile-email">{savedEmail}</p>
         <button
@@ -51,12 +52,6 @@ function Profile({ history }) {
           Logout
         </button>
       </section>
-      {searchBarVisible && <SearchBar
-        title="Profile"
-        history={ history }
-        searchBarVisible={ searchBarVisible }
-        setSearchbar={ setSearchbar }
-      />}
       <Footer history={ history } />
     </main>
   );

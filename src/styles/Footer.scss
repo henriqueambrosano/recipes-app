@@ -1,9 +1,9 @@
 @import './global_variables.scss';
 
 .component__footer {
+  display: flex;
+  justify-content: space-around;
  width: 100vw;
- display: flex;
- justify-content: space-around;
  &__btn {
    background-color: $primary-color;
    border: none;
