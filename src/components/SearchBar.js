@@ -30,57 +30,70 @@ function SearchBar({ title, history }) {
   };
 
   return (
-    <>
-      <label htmlFor="ingredient">
+    <section className="component__searchbar">
+      <div className="component__searchbar__container">
         <input
-          type="radio"
-          id="ingredient"
-          name="search_option"
-          onClick={ () => setSearchType(
-            `https://www.${isItDrink}.com/api/json/v1/1/filter.php?i=`,
-          ) }
-          data-testid="ingredient-search-radio"
+          type="text"
+          id="search-input"
+          name="searchInput"
+          className="component__searchbar__container__input__name"
+          data-testid="search-input"
+          onChange={ handleTextChange }
+          placeholder="Search for recipe, name or first letter"
         />
-        Ingredient
-      </label>
-      <label htmlFor="name">
-        <input
-          type="radio"
-          id="name"
-          name="search_option"
-          value="name"
-          onClick={ () => setSearchType(
-            `https://www.${isItDrink}.com/api/json/v1/1/search.php?s=`,
-          ) }
-          data-testid="name-search-radio"
-        />
-        Name
-      </label>
-      <label htmlFor="first-letter">
-        <input
-          type="radio"
-          id="first-letter"
-          name="search_option"
-          value="first-letter"
-          onClick={ () => setSearchType(
-            `https://www.${isItDrink}.com/api/json/v1/1/search.php?f=`,
-          ) }
-          data-testid="first-letter-search-radio"
-        />
-        First Letter
-      </label>
-      <input
-        type="text"
-        id="search-input"
-        name="searchInput"
-        data-testid="search-input"
-        onChange={ handleTextChange }
-        placeholder="Search for recipe, name or first letter"
-      />
-      <button type="button" data-testid="exec-search-btn" onClick={ saveRecipes }>
-        Search
-      </button>
-    </>
+        <button
+          className="component__searchbar__container__button"
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ saveRecipes }
+        >
+          Search
+        </button>
+      </div>
+      <form>
+        <label htmlFor="ingredient" className="component__searchbar__ingredient">
+          <input
+            type="radio"
+            id="ingredient"
+            name="search_option"
+            className="component__searchbar__ingredient__input"
+            onClick={ () => setSearchType(
+              `https://www.${isItDrink}.com/api/json/v1/1/filter.php?i=`,
+            ) }
+            data-testid="ingredient-search-radio"
+          />
+          Ingredient
+        </label>
+        <label htmlFor="name" className="component__searchbar__ingredient">
+          <input
+            type="radio"
+            id="name"
+            name="search_option"
+            className="component__searchbar__ingredient__input"
+            value="name"
+            onClick={ () => setSearchType(
+              `https://www.${isItDrink}.com/api/json/v1/1/search.php?s=`,
+            ) }
+            data-testid="name-search-radio"
+          />
+          Name
+        </label>
+        <label htmlFor="first-letter" className="component__searchbar__ingredient">
+          <input
+            type="radio"
+            id="first-letter"
+            name="search_option"
+            value="first-letter"
+            className="component__searchbar__ingredient__input"
+            onClick={ () => setSearchType(
+              `https://www.${isItDrink}.com/api/json/v1/1/search.php?f=`,
+            ) }
+            data-testid="first-letter-search-radio"
+          />
+          First Letter
+        </label>
+      </form>
+    </section>
   );
 }
 

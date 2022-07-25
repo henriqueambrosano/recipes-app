@@ -40,7 +40,6 @@ function DrinkDetails({ match, history }) {
           path={ history.location.pathname }
         />
       )}
-
       {recomendedMeals && <Recomendations recipes={ recomendedMeals } type="strMeal" />}
       {!doneRecipes.some((item) => item.id === match.params.id)
         && (

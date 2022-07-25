@@ -3,10 +3,29 @@ import PropTypes from 'prop-types';
 
 function Card({ index, name, image, history, path }) {
   return (
-    <button type="button" onClick={ () => history.push(path) } className="card">
-      <div data-testid={ `${index}-recipe-card` }>
-        <h3 data-testid={ `${index}-card-name` }>{name}</h3>
-        <img src={ image } data-testid={ `${index}-card-img` } alt={ name } />
+    <button
+      className="cards__section__btn"
+      type="button"
+      onClick={ () => history.push(path) }
+    >
+      <div
+        data-testid={ `${index}-recipe-card` }
+        className="cards__section__btn__container"
+      >
+        <div className="cards__section__btn__container__text">
+          <h3
+            data-testid={ `${index}-card-name` }
+          >
+            {name}
+
+          </h3>
+        </div>
+        <img
+          className="cards__section__btn__container__img"
+          src={ image }
+          data-testid={ `${index}-card-img` }
+          alt={ name }
+        />
       </div>
     </button>
   );

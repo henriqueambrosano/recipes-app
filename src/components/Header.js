@@ -9,29 +9,35 @@ function Header({ title, hasSearchBar, history }) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={ () => history.push('/profile') }
-      >
-        <img
-          src={ profileIcon }
-          alt="profile icon"
-          data-testid="profile-top-btn"
-        />
-      </button>
-      {hasSearchBar && (
+      <header className="component__header">
         <button
+          className="component__header__profile__btn"
           type="button"
-          onClick={ () => setSearchbar(!searchBarVisible) }
+          onClick={ () => history.push('/profile') }
         >
           <img
-            src={ searchIcon }
-            alt="search icon"
-            data-testid="search-top-btn"
+            src={ profileIcon }
+            alt="profile icon"
+            className="component__header__profile__btn__img"
+            data-testid="profile-top-btn"
           />
         </button>
-      )}
-      <h1 data-testid="page-title">{title}</h1>
+        <h1 className="component__header__title" data-testid="page-title">{title}</h1>
+        {hasSearchBar && (
+          <button
+            type="button"
+            className="component__header__search__btn"
+            onClick={ () => setSearchbar(!searchBarVisible) }
+          >
+            <img
+              src={ searchIcon }
+              alt="search icon"
+              className="component__header__search__btn__img"
+              data-testid="search-top-btn"
+            />
+          </button>
+        )}
+      </header>
       {searchBarVisible && <SearchBar title={ title } history={ history } />}
     </>
   );

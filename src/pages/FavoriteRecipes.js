@@ -15,38 +15,40 @@ function FavoriteRecipes({ history }) {
 
   return (
     <>
-      <Header title="Favorite Recipes" hasSearchBar={ false } />
-      <div>
-        <label htmlFor="AllBtn" data-testid="filter-by-all-btn">
-          All
-          <input
-            id="AllBtn"
-            type="radio"
-            name="filterBtn"
-            value="All"
-            onClick={ setFilter }
-          />
-        </label>
-        <label htmlFor="FoodBtn" data-testid="filter-by-food-btn">
-          Food
-          <input
-            id="FoodBtn"
-            type="radio"
-            name="filterBtn"
-            value="food"
-            onClick={ setFilter }
-          />
-        </label>
-        <label htmlFor="DrinkBtn" data-testid="filter-by-drink-btn">
-          Drink
-          <input
-            id="DrinkBtn"
-            type="radio"
-            name="filterBtn"
-            value="drink"
-            onClick={ setFilter }
-          />
-        </label>
+      <div className="top__container">
+        <Header title="Favorite Recipes" hasSearchBar={ false } />
+        <div>
+          <label htmlFor="AllBtn" data-testid="filter-by-all-btn">
+            All
+            <input
+              id="AllBtn"
+              type="radio"
+              name="filterBtn"
+              value="All"
+              onClick={ setFilter }
+            />
+          </label>
+          <label htmlFor="FoodBtn" data-testid="filter-by-food-btn">
+            Food
+            <input
+              id="FoodBtn"
+              type="radio"
+              name="filterBtn"
+              value="food"
+              onClick={ setFilter }
+            />
+          </label>
+          <label htmlFor="DrinkBtn" data-testid="filter-by-drink-btn">
+            Drink
+            <input
+              id="DrinkBtn"
+              type="radio"
+              name="filterBtn"
+              value="drink"
+              onClick={ setFilter }
+            />
+          </label>
+        </div>
       </div>
       {
         favoriteRecipes.filter((item) => item.type === btnFilter || btnFilter === 'All')

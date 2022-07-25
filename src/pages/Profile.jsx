@@ -24,7 +24,10 @@ function Profile({ history }) {
   };
   return (
     <main>
-      <Header title="Profile" hasSearchBar={ false } history={ history } />
+      <div className="top__container">
+
+        <Header title="Profile" hasSearchBar={ false } history={ history } />
+      </div>
       <section>
         <p data-testid="profile-email">{savedEmail}</p>
         <button

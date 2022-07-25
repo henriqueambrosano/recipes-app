@@ -14,20 +14,24 @@ function Recipes({ history }) {
 
   return (
     <>
-      <Header title="Foods" hasSearchBar history={ history } />
-      <CategoryButtons title="Foods" />
-      {
-        recipes.map((item, index) => (
-          <Card
-            key={ index }
-            name={ item.strMeal }
-            index={ index }
-            image={ item.strMealThumb }
-            path={ `foods/${item.idMeal}` }
-            history={ history }
-          />
-        ))
-      }
+      <div className="top__container">
+        <Header title="Foods" hasSearchBar history={ history } />
+        <CategoryButtons title="Foods" />
+      </div>
+      <section className="cards__section">
+        {
+          recipes.map((item, index) => (
+            <Card
+              key={ index }
+              name={ item.strMeal }
+              index={ index }
+              image={ item.strMealThumb }
+              path={ `foods/${item.idMeal}` }
+              history={ history }
+            />
+          ))
+        }
+      </section>
       <Footer history={ history } />
     </>
   );

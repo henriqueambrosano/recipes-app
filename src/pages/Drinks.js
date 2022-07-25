@@ -13,20 +13,25 @@ function Drinks({ history }) {
     ? recipesList.drinks.filter((item, index) => index < +'12') : [];
   return (
     <>
-      <Header title="Drinks" hasSearchBar history={ history } />
-      <CategoryButtons title="Drinks" />
-      {
-        recipes.map((item, index) => (
-          <Card
-            key={ index }
-            name={ item.strDrink }
-            index={ index }
-            image={ item.strDrinkThumb }
-            path={ `drinks/${item.idDrink}` }
-            history={ history }
-          />
-        ))
-      }
+      <div className="top__container">
+        <Header title="Drinks" hasSearchBar history={ history } />
+        <CategoryButtons title="Drinks" />
+      </div>
+      <section className="cards__section">
+        {
+          recipes.map((item, index) => (
+            <Card
+              key={ index }
+              name={ item.strDrink }
+              index={ index }
+              image={ item.strDrinkThumb }
+              path={ `drinks/${item.idDrink}` }
+              history={ history }
+            />
+          ))
+        }
+
+      </section>
       <Footer history={ history } />
     </>
   );
