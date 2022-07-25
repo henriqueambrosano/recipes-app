@@ -17,6 +17,7 @@ function ShareBtn({ path, index }) {
         type="button"
         data-testid="share-btn"
         onClick={ copyToClipboard }
+        className="card__btn"
       >
         <img
           data-testid={ `${index.index}-horizontal-share-btn` }

@@ -5,6 +5,7 @@ import Recomendations from '../components/Recomendations';
 import useFetchDetails from '../hooks/useFetchDetails';
 import useDoneRecipesStorage from '../hooks/useDoneRecipesStorage';
 import useDetailsStorage from '../hooks/useDetailsStorage';
+import start from '../images/start.svg';
 
 function DrinkDetails({ match, history }) {
   const { recomendedMeals, recipeDetail } = useFetchDetails(match);
@@ -43,14 +44,17 @@ function DrinkDetails({ match, history }) {
       {recomendedMeals && <Recomendations recipes={ recomendedMeals } type="strMeal" />}
       {!doneRecipes.some((item) => item.id === match.params.id)
         && (
-          <button
-            className="btnRecipe"
-            type="button"
-            data-testid="start-recipe-btn"
-            onClick={ startRecipe }
-          >
-            {btnName}
-          </button>
+          <div className="start__container">
+            <button
+              type="button"
+              className="start__container__btn"
+              data-testid="start-recipe-btn"
+              onClick={ startRecipe }
+            >
+              <img src={ start } className="start__container__icon" alt="start" />
+              {btnName}
+            </button>
+          </div>
         )}
     </>
   );
