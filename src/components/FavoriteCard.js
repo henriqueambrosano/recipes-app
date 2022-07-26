@@ -10,10 +10,10 @@ function FavoriteCard({ recipe, index, history }) {
   };
   const { id, image, name, nationality, type, alcoholicOrNot, category } = recipe;
   return (
-    <div>
-      { isFavorited
+    // <div className="done__recipe__card">
+    isFavorited
         && (
-          <div>
+          <div className="done__recipe__card">
             <button
               type="button"
               className="no-border"
@@ -26,25 +26,33 @@ function FavoriteCard({ recipe, index, history }) {
                 data-testid={ `${index}-horizontal-image` }
               />
             </button>
-            <h6
-              data-testid={ `${index}-horizontal-top-text` }
-            >
-              {`${nationality}${alcoholicOrNot} - ${category}`}
-            </h6>
-            <button
-              type="button"
-              className="no-border"
-              onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
-            >
-              <h6 data-testid={ `${index}-horizontal-name` }>{name}</h6>
-            </button>
-            <ShareBtn index={ { index } } path={ `/${type}s/${id}` } />
-            <button type="button" onClick={ verifieFavorite } className="no-border">
-              <FavoriteBtn cardDetails={ recipe } index={ index } recipeType={ type } />
-            </button>
+            <div className="done__recipe__card__infos">
+              <h6
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                {`${nationality}${alcoholicOrNot} - ${category}`}
+              </h6>
+              <button
+                type="button"
+                className="no-border"
+                onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
+              >
+                <h6 data-testid={ `${index}-horizontal-name` }>{name}</h6>
+              </button>
+              <div>
+                <ShareBtn index={ { index } } path={ `/${type}s/${id}` } />
+                <button type="button" onClick={ verifieFavorite } className="no-border">
+                  <FavoriteBtn
+                    cardDetails={ recipe }
+                    index={ index }
+                    recipeType={ type }
+                  />
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-    </div>
+        )
+  // </div>
   );
 }
 

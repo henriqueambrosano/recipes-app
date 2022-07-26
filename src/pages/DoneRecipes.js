@@ -12,10 +12,10 @@ function DoneRecipes({ history }) {
   const setFilter = ({ target }) => setBtnFilter(target.value);
 
   return (
-    <>
-      <div className="top__container">
+    <div className="top__container">
+      <div className="top__container__box">
         <Header title="Done Recipes" hasSearchBar={ false } />
-        <div>
+        <div className="top__container__filters">
           <label htmlFor="AllBtn" data-testid="filter-by-all-btn">
             All
             <input
@@ -48,7 +48,7 @@ function DoneRecipes({ history }) {
           </label>
         </div>
       </div>
-      <div>
+      <div className="top__container__cards">
         {doneRecipes.filter((item) => item.type === btnFilter || btnFilter === 'All')
           .map((recipe, index) => (
             <DoneRecipeCard
@@ -59,7 +59,7 @@ function DoneRecipes({ history }) {
             />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 

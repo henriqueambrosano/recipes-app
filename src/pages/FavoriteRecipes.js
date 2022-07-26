@@ -14,10 +14,10 @@ function FavoriteRecipes({ history }) {
   };
 
   return (
-    <>
-      <div className="top__container">
+    <div className="top__container">
+      <div className="top__container__box">
         <Header title="Favorite Recipes" hasSearchBar={ false } />
-        <div>
+        <div className="top__container__filters">
           <label htmlFor="AllBtn" data-testid="filter-by-all-btn">
             All
             <input
@@ -50,18 +50,20 @@ function FavoriteRecipes({ history }) {
           </label>
         </div>
       </div>
-      {
-        favoriteRecipes.filter((item) => item.type === btnFilter || btnFilter === 'All')
-          .map((recipe, index) => (
-            <FavoriteCard
-              history={ history }
-              key={ index }
-              recipe={ recipe }
-              index={ index }
-            />
-          ))
-      }
-    </>
+      <div className="top__container__cards">
+        {
+          favoriteRecipes.filter((item) => item.type === btnFilter || btnFilter === 'All')
+            .map((recipe, index) => (
+              <FavoriteCard
+                history={ history }
+                key={ index }
+                recipe={ recipe }
+                index={ index }
+              />
+            ))
+        }
+      </div>
+    </div>
   );
 }
 
