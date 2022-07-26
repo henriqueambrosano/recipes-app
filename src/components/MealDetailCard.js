@@ -16,31 +16,59 @@ const MealDetailCard = ({ cardDetails, path }) => {
 
   return (
     <>
-      <img
-        src={ strMealThumb }
-        data-testid="recipe-photo"
-        alt="meal"
-        className="recipe-image"
-      />
-      <h1 data-testid="recipe-title">{strMeal}</h1>
-      <ShareBtn path={ path } />
-      <FavoriteBtn cardDetails={ cardDetails } recipeType="idMeal" />
-      <p data-testid="recipe-category">{strCategory}</p>
-      {ingredients.map((ingr, i) => (
-        <p
-          data-testid={ `${i}-ingredient-name-and-measure` }
-          key={ `ingr-${i}` }
-        >
-          {`${ingr}${measures[i] ? ` - ${measures[i]}` : ''}`}
-        </p>
-      ))}
-      <p data-testid="instructions">{strInstructions}</p>
-      <iframe
-        title="recipe-video"
-        width="400"
-        src={ strYoutube.replace('/watch?v=', '/embed/') }
-        data-testid="video"
-      />
+      <div className="red__bar" />
+      <div className="card__detail">
+        <img
+          src={ strMealThumb }
+          data-testid="recipe-photo"
+          className="card__detail__img"
+          alt="meal"
+        />
+        <div className="card__detail__container">
+          <h1
+            data-testid="recipe-title"
+            className="card__detail__container__title"
+          >
+            {strMeal}
+
+          </h1>
+          <p
+            data-testid="recipe-category"
+            className="card__detail__container__tag"
+          >
+            {strCategory}
+
+          </p>
+          <div className="card__detail__container__btn">
+            <ShareBtn path={ path } />
+            <FavoriteBtn cardDetails={ cardDetails } recipeType="idMeal" />
+          </div>
+        </div>
+      </div>
+      <div className="ingredients__container">
+        {ingredients.map((ingr, i) => (
+          <p
+            data-testid={ `${i}-ingredient-name-and-measure` }
+            key={ `ingr-${i}` }
+            className="ingredients__container__item"
+          >
+            {`${ingr}${measures[i] ? ` - ${measures[i]}` : ''}`}
+          </p>
+        ))}
+
+      </div>
+      <p data-testid="instructions" className="detail__paragraph">{strInstructions}</p>
+      <section className="video__container">
+        <div className="video__container__border">
+          <iframe
+            title="recipe-video"
+            width="400"
+            className="video__container__border__video"
+            src={ strYoutube.replace('/watch?v=', '/embed/') }
+            data-testid="video"
+          />
+        </div>
+      </section>
     </>
   );
 };
