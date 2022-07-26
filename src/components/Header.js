@@ -23,20 +23,22 @@ function Header({ title, hasSearchBar, history }) {
           />
         </button>
         <h1 className="component__header__title" data-testid="page-title">{title}</h1>
-        {hasSearchBar && (
-          <button
-            type="button"
-            className="component__header__search__btn"
-            onClick={ () => setSearchbar(!searchBarVisible) }
-          >
-            <img
-              src={ searchIcon }
-              alt="search icon"
-              className="component__header__search__btn__img"
-              data-testid="search-top-btn"
-            />
-          </button>
-        )}
+        <div>
+          {hasSearchBar && (
+            <button
+              type="button"
+              className="component__header__search__btn"
+              onClick={ () => setSearchbar(!searchBarVisible) }
+            >
+              <img
+                src={ searchIcon }
+                alt="search icon"
+                className="component__header__search__btn__img"
+                data-testid="search-top-btn"
+              />
+            </button>
+          )}
+        </div>
       </header>
       {searchBarVisible && <SearchBar title={ title } history={ history } />}
     </>

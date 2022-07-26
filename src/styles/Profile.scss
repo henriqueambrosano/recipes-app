@@ -1,13 +1,21 @@
 @import './global_variables.scss';
 
+.section__profile {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 1000;
+}
+
 .profile_container {
     background-color: $primary-color;
-    border-radius: 30px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
-    margin-left: 295px;
     width: 700px;
     height: 450px;
 };
@@ -28,7 +36,7 @@
     margin-bottom: 40px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .buttons-container {
@@ -48,6 +56,7 @@
     margin-bottom: 10px;
     display: flex;
     justify-content: space-around;
+    font-weight: 1000;
 }
 
 .profile_checked {
@@ -63,6 +72,7 @@
     margin-bottom: 10px;
     display: flex;
     justify-content: space-around;
+    font-weight: 1000;
 }
 
 .profile_heart {
@@ -78,6 +88,7 @@
     border-radius: 30px;
     display: flex;
     justify-content: space-around;
+    font-weight: 1000;
 }
 
 .profile_logout {
@@ -86,8 +97,13 @@
 }
 
 @media screen and (max-width:1100px){
+    .profile_smile {
+        width: 70%;
+    }
     .profile_container {
-        width: 400px;
-        margin-left: 350px;
+        width: 300px;
+    }
+    .profile_container_email{
+        font-size: $small-font-size;
     }
 }
