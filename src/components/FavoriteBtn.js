@@ -79,7 +79,7 @@ function FavoriteBtn({ cardDetails, index, recipeType }) {
   };
 
   return (
-    <button type="button" onClick={ setAsFavorite }>
+    <button type="button" className="card__btn" onClick={ setAsFavorite }>
       <img
         data-testid={ typeof index === 'number'
           ? `${index}-horizontal-favorite-btn` : 'favorite-btn' }

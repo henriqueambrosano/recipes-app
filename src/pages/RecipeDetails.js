@@ -60,7 +60,7 @@ function RecipeDetails({ match, history }) {
   };
 
   return (
-    <>
+    <main className="recipes__container">
       {recipeDetail && (
         <MealDetailCard
           cardDetails={ recipeDetail.meals[0] }
@@ -71,16 +71,18 @@ function RecipeDetails({ match, history }) {
         <Recomendations type="strDrink" recipes={ recomendedDrinks } />
       )}
       {!doneRecipes.some((item) => item.id === match.params.id) && (
-        <button
-          className="btnRecipe"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ startRecipe }
-        >
-          {btnName}
-        </button>
+        <div className="start__container">
+          <button
+            type="button"
+            className="start__container__btn"
+            data-testid="start-recipe-btn"
+            onClick={ startRecipe }
+          >
+            {btnName}
+          </button>
+        </div>
       )}
-    </>
+    </main>
   );
 }
 
