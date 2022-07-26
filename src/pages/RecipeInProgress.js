@@ -107,48 +107,68 @@ function RecipeInProgress({ props: { history, match }, title }) {
   };
 
   return (
-    <div>
+    <div className="recipes__container">
       {Object.keys(detailsRecipe).length && (
-        <>
-          <img
-            className="recipe-image"
-            src={ `${detailsRecipe[`str${thumbNail}Thumb`]}` }
-            alt=""
-            data-testid="recipe-photo"
-          />
-          <h2 data-testid="recipe-title">{ detailsRecipe[`str${thumbNail}`] }</h2>
-          <ShareBtn path={ history.location.pathname } />
-          <FavoriteBtn
-            cardDetails={ detailsRecipe }
-            recipeType={ title === 'Drinks' ? 'idDrink' : 'idMeal' }
-          />
-          <p data-testid="recipe-category">{detailsRecipe.strCategory}</p>
-          {ingredientsFound.map((ingredient, index) => (
-            <label
-              data-testid={ `${index}-ingredient-step` }
-              htmlFor={ `ingredientFound${index}` }
-              key={ `ingredient${index}` }
-            >
-              <input
-                id={ `ingredientFound${index}` }
-                type="checkbox"
-                onClick={ () => addIngredient(ingredient) }
-                defaultChecked={ checkDisabled(ingredient) }
-              />
-              {`${ingredient} - ${measuresFound[index]}`.replace('- undefined', '')}
-            </label>
-          ))}
-          <p data-testid="instructions">{detailsRecipe.strInstructions}</p>
-          <button
-            type="button"
-            data-testid="finish-recipe-btn"
-            disabled={ endBtn }
-            onClick={ saveDoneRecipe }
+        <div className="recipes__container">
+          <div className="red__bar" />
+          <div className="card__detail">
+            <img
+              className="card__detail__img"
+              src={ `${detailsRecipe[`str${thumbNail}Thumb`]}` }
+              alt=""
+              data-testid="recipe-photo"
+            />
+            <div className="card__detail__container">
+              <h2 data-testid="recipe-title">{ detailsRecipe[`str${thumbNail}`] }</h2>
+              <p data-testid="recipe-category">{detailsRecipe.strCategory}</p>
+              <div className="card__detail__container__btn">
+                <ShareBtn path={ history.location.pathname } />
+                <FavoriteBtn
+                  cardDetails={ detailsRecipe }
+                  recipeType={ title === 'Drinks' ? 'idDrink' : 'idMeal' }
+                />
+              </div>
+            </div>
+          </div>
+          <div className="ingredients__container">
+            {ingredientsFound.map((ingredient, index) => (
+              <label
+                data-testid={ `${index}-ingredient-step` }
+                htmlFor={ `ingredientFound${index}` }
+                key={ `ingredient${index}` }
+                className="ingredients__container__item"
+              >
+                <input
+                  id={ `ingredientFound${index}` }
+                  type="checkbox"
+                  className="ingredients__container__item__checkbox"
+                  onClick={ () => addIngredient(ingredient) }
+                  defaultChecked={ checkDisabled(ingredient) }
+                />
+                {`${ingredient} - ${measuresFound[index]}`.replace('- undefined', '')}
+              </label>
+            ))}
+          </div>
+          <p
+            className="detail__paragraph"
+            data-testid="instructions"
           >
-            Finalizar receita
+            {detailsRecipe.strInstructions}
 
-          </button>
-        </>
+          </p>
+          <div className="start__container">
+            <button
+              type="button"
+              className="start__container__btn"
+              data-testid="finish-recipe-btn"
+              disabled={ endBtn }
+              onClick={ saveDoneRecipe }
+            >
+              Finalizar receita
+
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
