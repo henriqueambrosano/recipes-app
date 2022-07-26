@@ -30,49 +30,50 @@ function Profile({ history }) {
   return (
     <main>
       <div className="top__container">
-
         <Header title="Profile" hasSearchBar={ false } history={ history } />
       </div>
-      <section className="profile_container">
-        <img className="profile_smile" alt="smileIcon" src={ smileIcon } />
-        <div className="profile_picture_container">
-          <img className="profile_picture" alt="pictureIcon" src={ pictureIcon } />
-          <p
-            data-testid="profile-email"
-            className="profile_container_email"
-          >
-            {savedEmail}
-          </p>
-        </div>
-        <div className="buttons-container">
-          <button
-            type="button"
-            data-testid="profile-done-btn"
-            className="profile_done_btn"
-            onClick={ () => history.push('/done-recipes') }
-          >
-            <img className="profile_checked" alt="checkIcon" src={ checkIcon } />
-            Done Recipes
-          </button>
-          <button
-            type="button"
-            data-testid="profile-favorite-btn"
-            className="profile_favorite_btn"
-            onClick={ () => history.push('/favorite-recipes') }
-          >
-            <img className="profile_heart" alt="heartIcon" src={ profileHeart } />
-            Favorite Recipes
-          </button>
-          <button
-            type="button"
-            data-testid="profile-logout-btn"
-            className="profile_logout_btn"
-            onClick={ logout }
-          >
-            <img className="profile_logout" alt="logoutIcon" src={ logoutIcon } />
-            Logout
-          </button>
-        </div>
+      <section className="section__profile">
+        <section className="profile_container">
+          <img className="profile_smile" alt="smileIcon" src={ smileIcon } />
+          <div className="profile_picture_container">
+            <img className="profile_picture" alt="pictureIcon" src={ pictureIcon } />
+            <p
+              data-testid="profile-email"
+              className="profile_container_email"
+            >
+              {savedEmail}
+            </p>
+          </div>
+          <div className="buttons-container">
+            <button
+              type="button"
+              data-testid="profile-done-btn"
+              className="profile_done_btn"
+              onClick={ () => history.push('/done-recipes') }
+            >
+              <img className="profile_checked" alt="checkIcon" src={ checkIcon } />
+              Done Recipes
+            </button>
+            <button
+              type="button"
+              data-testid="profile-favorite-btn"
+              className="profile_favorite_btn"
+              onClick={ () => history.push('/favorite-recipes') }
+            >
+              <img className="profile_heart" alt="heartIcon" src={ profileHeart } />
+              Favorite Recipes
+            </button>
+            <button
+              type="button"
+              data-testid="profile-logout-btn"
+              className="profile_logout_btn"
+              onClick={ logout }
+            >
+              <img className="profile_logout" alt="logoutIcon" src={ logoutIcon } />
+              Logout
+            </button>
+          </div>
+        </section>
       </section>
       <Footer history={ history } />
     </main>
