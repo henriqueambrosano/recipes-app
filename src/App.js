@@ -6,7 +6,6 @@ import './styles/Footer.scss';
 import './styles/Recipes.scss';
 import './styles/Profile.scss';
 import './styles/DoneRecipes.scss';
-import './styles/FavoriteRecipes.scss';
 import './styles/RecipeDetails.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Switch, Route } from 'react-router-dom';
