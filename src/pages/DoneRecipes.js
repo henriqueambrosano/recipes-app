@@ -8,7 +8,6 @@ import useBtnFilter from '../hooks/useBtnFilter';
 function DoneRecipes({ history }) {
   const { btnFilter, setBtnFilter } = useBtnFilter();
   const { doneRecipes } = useDoneRecipesStorage();
-
   const setFilter = ({ target }) => setBtnFilter(target.value);
 
   return (
